@@ -1,24 +1,49 @@
 // @ts-check
 /* eslint-disable no-param-reassign */
+import axios from 'axios';
 
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createEntityAdapter, createAsyncThunk } from '@reduxjs/toolkit';
+import routes from '../routes.js';
 
-const initialState = {
-  tasks: [],
-};
+export const fetchTasks = createAsyncThunk(
+  'tasks/fetchTasks',
+  async () => {
+    const response = await axios.get(routes.tasksPath());
+    return response.data.items;
+  },
+);
+
+// BEGIN (write your solution here)
+export const sendTask = createAsyncThunk(
+  'tasks/sendTask',
+  async (task) => {
+    const { data } = await axios.post(routes.tasksPath(), task);
+    return data;
+  },
+);
+
+export const removeTask = createAsyncThunk(
+  'tasks/removeTask',
+  async (id) => {
+    await axios.delete(routes.taskPath(id));
+    return id;
+  },
+);
+
+const tasksAdapter = createEntityAdapter();
+const initialState = tasksAdapter.getInitialState();
 
 const tasksSlice = createSlice({
   name: 'tasks',
   initialState,
-  reducers: {
-    addTask: (state, { payload: { task } }) => {
-      // BEGIN (write your solution here)
-      state.tasks = [task, ...state.tasks];
-      // END
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchTasks.fulfilled, tasksAdapter.addMany)
+      .addCase(sendTask.fulfilled, tasksAdapter.addOne)
+      .addCase(removeTask.fulfilled, tasksAdapter.removeOne);
   },
 });
-
-export const { addTask } = tasksSlice.actions;
+export const selectors = tasksAdapter.getSelectors((state) => state.tasks);
 
 export default tasksSlice.reducer;
+// END

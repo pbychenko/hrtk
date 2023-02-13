@@ -1,21 +1,36 @@
 // @ts-check
+/* eslint-disable react-hooks/exhaustive-deps */
 
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+// BEGIN (write your solution here)
+import { removeTask, fetchTasks, selectors } from '../slices/tasksSlice.js';
+// END
 
 const Tasks = () => {
-  const tasks = useSelector((state) => state.tasksStore.tasks);
+  const dispatch = useDispatch();
+  // BEGIN (write your solution here)
+  const tasks = useSelector(selectors.selectAll);
 
-  if (tasks.length === 0) {
-    return null;
-  }
+  useEffect(() => {
+    dispatch(fetchTasks());
+  }, []);
 
-  return (
+  const handleRemoveTask = (id) => {
+    dispatch(removeTask(id));
+  };
+  // END
+
+  return tasks && (
     <div className="mt-3">
       <ul className="list-group">
-        {tasks.map(({ id, text }) => (
+        {tasks.map(({ id, name }) => (
           <li key={id} className="list-group-item d-flex">
-            <span className="mr-auto">{text}</span>
+            <span className="mr-auto">{name}</span>
+            <button type="button" className="close" onClick={() => handleRemoveTask(id)}>
+              <span>&times;</span>
+            </button>
           </li>
         ))}
       </ul>

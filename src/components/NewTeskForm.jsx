@@ -1,21 +1,26 @@
 // @ts-check
 
 import React, { useState } from 'react';
-import _ from 'lodash';
 import { useDispatch } from 'react-redux';
-import { addTask } from '../slices/tasksSlice.js';
+
+// BEGIN (write your solution here)
+import { sendTask } from '../slices/tasksSlice.js';
+// END
 
 const NewTaskForm = () => {
-  const [text, setText] = useState('');
+  const [name, setName] = useState('');
   const dispatch = useDispatch();
+
   const handleAddTask = (e) => {
+    // BEGIN (write your solution here)
     e.preventDefault();
-    const task = { text, id: _.uniqueId() };
-    dispatch(addTask({ task }));
-    setText('');
+    const task = { name };
+    dispatch(sendTask(task));
+    setName('');
+    // END
   };
 
-  const handleUpdateNewTaskText = (e) => setText(e.target.value);
+  const onChange = (e) => setName(e.target.value);
 
   return (
     <form action="" className="form-inline" onSubmit={handleAddTask}>
@@ -24,8 +29,8 @@ const NewTaskForm = () => {
           type="text"
           data-testid="input"
           required
-          value={text}
-          onChange={handleUpdateNewTaskText}
+          value={name}
+          onChange={onChange}
         />
       </div>
       <input type="submit" data-testid="submit" className="btn btn-primary btn-sm" value="Add" />
