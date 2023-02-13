@@ -22,10 +22,18 @@ const Post = ({ post }) => {
     dispatch(commentsActions.addComment(comment));
   };
 
+  const removePost = () => {
+    // При удалении поста передается весь пост
+    dispatch(postsActions.removePost(post));
+  };
+
   return (
     <div className="card mb-5">
       <div className="card-header">
         {`${post.body} - ${author.name}`}
+        <button type="button" className="close" aria-label="Close" onClick={removePost}>
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
       <div className="card-body">
         {post.comments.map((commentId) => <Comment key={commentId} commentId={commentId} />)}

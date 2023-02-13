@@ -5,12 +5,10 @@ import postsReducer from './postsSlice.js';
 import commentsReducer from './commentsSlice.js';
 import usersReducer from './usersSlice.js';
 
-// BEGIN (write your solution here)
 export default configureStore({
-    reducer: {
-      users: usersReducer,
-      posts: postsReducer,
-      comments: commentsReducer,
-    },
-  });
-// END
+  reducer: {
+    users: usersReducer,
+    posts: postsReducer,
+    comments: commentsReducer,
+  },
+});

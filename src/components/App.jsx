@@ -7,6 +7,7 @@ import { normalize, schema } from 'normalizr';
 import Posts from './Posts.jsx';
 import routes from '../routes.js';
 import PostForm from './PostForm.jsx';
+import Users from './Users.jsx';
 
 import { actions as usersActions } from '../slices/usersSlice.js';
 import { actions as postsActions } from '../slices/postsSlice.js';
@@ -58,6 +59,11 @@ const App = () => {
           <PostForm />
         </div>
       </div>
+
+      <div className="mt-5">
+        <Users />
+      </div>
+
       <div className="mt-5">
         <Posts />
       </div>

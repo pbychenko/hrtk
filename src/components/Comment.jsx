@@ -16,14 +16,10 @@ const Comment = ({ commentId }) => {
     return { author: currentAuthor, comment: currentComment };
   });
 
-  if (!author || !comment) {
-    return null;
-  }
-
   return (
     <>
-      <h5 className="card-title">{ author.name }</h5>
-      <p className="card-text">{ comment.text }</p>
+      <h5 className="card-title">{ author ? author.name : '' }</h5>
+      <p className="card-text">{ comment ? comment.text : '' }</p>
     </>
   );
 };
