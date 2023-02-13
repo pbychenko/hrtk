@@ -4,8 +4,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  ids: [],
-  entities: {},
+  users: [],
 };
 
 const usersSlice = createSlice({
@@ -13,9 +12,7 @@ const usersSlice = createSlice({
   initialState,
   reducers: {
     setUsers(state, { payload }) {
-      const { entities, ids } = payload;
-      state.entities = entities;
-      state.ids = ids;
+      state.users = payload;
     },
   },
 });

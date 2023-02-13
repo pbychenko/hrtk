@@ -4,8 +4,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  ids: [],
-  entities: {},
+  posts: [],
 };
 
 const postsSlice = createSlice({
@@ -13,11 +12,7 @@ const postsSlice = createSlice({
   initialState,
   reducers: {
     setPosts(state, { payload }) {
-      // BEGIN (write your solution here)
-      const { entities, ids } = payload;
-      state.entities = entities;
-      state.ids = ids;
-      // END
+      state.posts = payload;
     },
   },
 });

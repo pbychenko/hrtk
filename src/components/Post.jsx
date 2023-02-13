@@ -1,15 +1,11 @@
-// @ts-check
-
 import React from 'react';
 import { useSelector } from 'react-redux';
 import Comment from './Comment.jsx';
 
 const Post = ({ post }) => {
   const author = useSelector((state) => {
-    // BEGIN (write your solution here)
-    const currentAuthor = state.usersReducer.entities[post.author];
+    const currentAuthor = state.usersReducer.users.find(({ id }) => id === post.author);
     return currentAuthor;
-    // END
   });
 
   return (

@@ -4,8 +4,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  ids: [],
-  entities: {},
+  comments: [],
 };
 
 const commentsSlice = createSlice({
@@ -13,11 +12,7 @@ const commentsSlice = createSlice({
   initialState,
   reducers: {
     setComments(state, { payload }) {
-      // BEGIN (write your solution here)
-      const { entities, ids } = payload;
-      state.entities = entities;
-      state.ids = ids;
-      // END
+      state.comments = payload;
     },
   },
 });

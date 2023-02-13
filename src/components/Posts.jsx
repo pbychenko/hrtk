@@ -1,5 +1,4 @@
 // @ts-check
-/* eslint-disable arrow-body-style */
 
 import React from 'react';
 import { useSelector } from 'react-redux';
@@ -7,11 +6,7 @@ import { useSelector } from 'react-redux';
 import Post from './Post.jsx';
 
 const Posts = () => {
-  const posts = useSelector((state) => {
-    // BEGIN (write your solution here)
-    return Object.values(state.postsReducer.entities);
-    // END
-  });
+  const { posts } = useSelector((state) => state.postsReducer);
 
   return (
     <div className="mt-3">
@@ -23,3 +18,4 @@ const Posts = () => {
 };
 
 export default Posts;
+
